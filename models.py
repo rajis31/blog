@@ -1,5 +1,6 @@
 import pymysql as sql
 import json
+import datetime as dt 
 
 
 class load_db:
@@ -63,7 +64,7 @@ if __name__ == "__main__":
     con.createDB("articles")
     con.deleteTable("article")
     con.createTable("article", {"id": "int primary key auto_increment", "title": "varchar(255)",
-                                "views": "decimal(15,2)", "likes": "bigint", "date_posted": "varchar(255)",
+                                "views": "bigint", "likes": "bigint", "date_posted": "varchar(255)",
                                 "date_updated": "varchar(255)", "content": "mediumtext"})
 
     import os 
@@ -73,5 +74,13 @@ if __name__ == "__main__":
     
     with open(os.path.join(HTML_DIR,"article.html"),encoding="UTF-8") as f:
         content = "".join(f.readlines())
-        print(content)
+        print(type(content))
+        today   = dt.date.today().strftime("%B %d, %Y")
+        con.cur.execute("""
+            INSERT INTO ARTICLE (title,views,likes,date_posted,date_updated,content) VALUES 
+                ('%s','%s','%s','%s','%s','%s');
+        """%("How to install Flask",0,0,today,today,"article.html"))
+
+        con.con.commit()
+        
     con.close()

@@ -291,15 +291,19 @@ code {
 
 .footer button{
   margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 5px 5px;
   background-color: #000;
   color: #fff;
   text-decoration: none;
-  
+  border: none;
+  transition: all ease-in-out 0.3s; 
+  opacity: 0.5;
 }
+
+.footer button:hover{
+  opacity: 1;
+}
+
 .copyright, .home{
   font-size: 0.8em;
 }
