@@ -1,0 +1,13 @@
+[Unit]
+Description=Blog site uWSGI instance
+After=network.targetS
+
+[Service]
+User=production
+Group=www-data
+WorkingDirectory=/home/production/blog-site
+Environment="PATH=/home/production/blog-site/venv/bin"
+ExecStart=/home/production/blog-site/venv/bin/uwsgi --ini app.ini
+
+[Install]
+WantedBy=multi-user.target

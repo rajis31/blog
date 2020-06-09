@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/article.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/artticle.css') }}">
     <link rel='shortcut icon' type='image/x-icon' href='favicon.png' />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <title>Article</title>
 </head>
-
 <body>
-    <header article_id={{id}}>
+    <header article_id={{id}} likes={{likes}}>
         <p style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 1.5rem;">Data Enthusiast</p>
         <ul class="nav__links">
             <li><a href="#">Login</a></li>
@@ -31,12 +29,10 @@
             <a href="#">About</a>
         </div>
     </div>
-
     <div class="article-content">
         <div class="title">
             <p>Aggressively Estimating Pick Values</p>
         </div>
-
         <div class="paragraph">
             <p>
                 <b> Quick Links ></b> Market Values, Trade Calculator <br><br>
@@ -44,7 +40,6 @@
                 happened in those
                 48 days: personal and otherwise. (I got approached by DynastyLeagueFootball and FFStatistics for writing
                 positions!
-
                 I’m making it sound like there are (good?) excuses as to why I haven’t updated the market values since
                 the
                 end of December last year - but none of them are quite accurate. The real reason for the delay was that
@@ -54,13 +49,10 @@
                 into
                 my usual draft-pick-value methodology. Let’s take a deeper dive into this.
             </p>
-
         </div>
-
         <div class="subtitle">
             <p>Usual Methodology </p>
         </div>
-
         <div class="paragraph">
             <p>
                 Dynasty owners are notorious for valuing picks extremely high, despite their typically low
@@ -72,7 +64,6 @@
                 evaluate and beat the odds. We’re in love with the allure of youth, unknown, and upside.
             </p>
         </div>
-
         <div class="paragraph">
             <p>
                 We have a tendency to look at picks through rose-colored glasses: when you look at the 1.02 draft pick
@@ -85,7 +76,6 @@
                 finally weigh back into the mental value calculation.
             </p>
         </div>
-
         <div class="paragraph">
             <p>
                 My usual methodology tries to approximate this “top-line” view by aggregating what the CURRENT best in
@@ -98,7 +88,6 @@
                 price can be too low - Saquon and 1.01 went for far more than the expectation last year!
             </p>
         </div>
-
         <div class="paragraph">
             <p>
                 2019 presented an interesting challenge to my usual process because of how much negative sentiment there
@@ -108,7 +97,6 @@
                 top 5 overall dynasty picks (thank you, Saquon! :smirk:) as originally planned. Was there any validity
                 for
                 these pick values? Only one way to find out: testing! 🤓
-
                 Despite being a data nerd, I didn’t take a very scientifically rigorous approach to this. I picked
                 several
                 pairings from the generated pick values and put them up on Reddit, Twitter, and a few league chats,
@@ -116,11 +104,10 @@
                 for people to describe how close the comparisons were.
             </p>
         </div>
-
         <div class="image">
             <img src="images/article1.png">
+            <img src="{{ url_for('static', filename='images/article1.png') }}"> 
         </div>
-
         <div class="paragraph">
             <p>I got a sample of responses back - but here were two overriding results:</p>
             <div class="list">
@@ -136,37 +123,30 @@
                             wide disparity of dynasty owner opinions</p>
                     </li>
                 </ul>
-
             </div>
         </div>
-
         <div class="paragraph">
             <p>
                 What to do? In theory, I could manually adjust the ranks so that 1.01-1.05 are slotted in at a certain
                 position…but I’ve never meant for these values to be a display of personal rankings and that would
                 definitely compromise that goal.
-
                 I continued tweaking and testing the algorithm, trying to weight the different classes and factors to
                 see if
                 the picks would better fit - but the answer never materialized.
             </p>
         </div>
-
         <div class="subtitle">
             <p>Ending decision: just publish it anyway!</p>
         </div>
-
         <div class="paragraph">
             <p>So now that I’m nearing fifty days without an update, I’ve decided on my final algorithm - straight-line
                 averaging across the 2015-16-17-18 classes. Once actual 2019 rankings come out, I’ll weight them into
                 the
                 value of the picks (and by more than the usual gradual easing-in).</p>
-
             <div class="code">
                 <code>What about the pesky early firsts that everyone agrees is misplaced?</code>
             </div>
         </div>
-
         <div class="paragraph">
             <p>
                 I’ve defended trade calculators in many an argument, and at the end of the day my answer has always been
@@ -180,34 +160,56 @@
                 It’s a tool that you can adjust however you see fit!
             </p>
         </div>
-
         <div class="article-info">
             <ul>
                 <li><b>Categories:</b> Values </li>
                 <li><b>Updated</b> May, 15 2020</li>
             </ul>
+        </div>
+    </div>
+    <div class="comments">
+        <button class="toggle"><span>+</span>Comments</button>
+        <div class="comment-form">
+            <p>Leave a comment below</p>
+            <form novalidate onsubmit="return false" method="POST">
+                <input placeholder="Name" type="text">
+                <br>
+                <input placeholder="Comment" type="text">
+                <br>
+                <input type="submit" onclick="updateComment()" value="Post">
+            </form>
+        </div>
+      
+        <div class="comment-list">
 
+            {% for comment in comments %}
+                <div class="comment" comment-id={{ comment[1] }}>
+                    <div class="comment-upper">
+                        <p class="comment-name">{{ comment[2] }}</p>
+                        <p class="comment-date">{{ comment[3] }}</p>
+                    </div>
+                    <div class="comment-lower">
+                        <p class="comment-text">{{ comment[4] }}</p>
+                    </div>
+                </div>
+          {% endfor %}
         </div>
 
     </div>
-
     <div class="page-scroll">
         <ul>
             <li> <a href="" style="color: #32859e;">Previous Article</a></i>
             <li><a href="#" style="color: #898c8f;">Next Article</a> </li>
         </ul>
-
     </div>
-
     <div class="footer">
         <p class="copyright">©2020 Copyright RAJ302.COM</p>
         <p><button onclick="updateLikes()">Like Me</button></p>
         <p class="home"><a href="#">Go Back</a></p>
     </div>
+    <script src="{{ url_for('static', filename='js/index.js') }}"> </script>
+    <script src="{{ url_for('static', filename='js/article.js') }}"> </script>
 
-    <script src="js/index.js"></script>
-    <script src="js/article.js"></script>
 
 </body>
-
 </html>

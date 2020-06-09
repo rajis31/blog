@@ -33,7 +33,6 @@ def article(id):
 
     db.cur.execute("SELECT * FROM COMMENTS WHERE article_id = {0} ORDER BY comment_id desc".format(id))
     comments = [comment for comment in db.cur.fetchall()]
-    print(comments)
     db.close()
     return render_template("article{0}.html".format(id), id=id, likes=likes, comments=comments)
 

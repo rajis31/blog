@@ -11,6 +11,7 @@ html {
   color: #494e52;
 }
 
+
 .content {
   min-height: calc(100vh - 200px);
 }
@@ -347,9 +348,6 @@ code {
 
 
 /*** Footer ***/
-
-
-
 .footer {
   width: 100vw;
   display: flex;
@@ -366,6 +364,7 @@ code {
   background-color: #000;
   color: #fff;
   text-decoration: none;
+  font-size: 20px;
   border: none;
   transition: all ease-in-out 0.3s; 
   opacity: 0.5;
@@ -392,21 +391,17 @@ code {
   }
 
   .comments{
-    width: 100%;
-    margin-left: 1em;
-    margin-right: 1em;
+    width: 100vw;
+    
   }
 
   .comment-form{
-    width: 100%;
-    margin-left: 1em;
-    margin-right: 1em;
+    width: 100vw;
+   
   }
 
   .comment-list{
-    width: 100%;
-    margin-left: 1em;
-    margin-right: 1em;
+    width: 100vw;
   }
 }
 
