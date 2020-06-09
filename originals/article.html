@@ -195,12 +195,12 @@
         <button class="toggle"><span>+</span>Comments</button>
         <div class="comment-form">
             <p>Leave a comment below</p>
-            <form method="POST">
+            <form novalidate>
                     <input placeholder="Name" type="text">
                 <br>
                     <input placeholder="Comment" type="text">
                 <br>
-                    <input type="submit" value="Post">
+                    <input type="submit"  onclick="updateComment()" value="Post">
             </form>
         </div>
 

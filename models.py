@@ -66,21 +66,24 @@ if __name__ == "__main__":
     con.createTable("article", {"id": "int primary key auto_increment", "title": "varchar(255)",
                                 "views": "bigint", "likes": "bigint", "date_posted": "varchar(255)",
                                 "date_updated": "varchar(255)", "content": "mediumtext"})
+   
+    con.createTable("comments",{"article_id":"int","comment_id":"int","name":"varchar(50)",
+                                "date_posted":"varchar(100)","content":"text"})
 
-    import os 
-    PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
-    HTML_DIR   = os.path.join(PARENT_DIR,"templates")
+    # import os 
+    # PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
+    # HTML_DIR   = os.path.join(PARENT_DIR,"templates")
 
     
-    with open(os.path.join(HTML_DIR,"article.html"),encoding="UTF-8") as f:
-        content = "".join(f.readlines())
-        print(type(content))
-        today   = dt.date.today().strftime("%B %d, %Y")
-        con.cur.execute("""
-            INSERT INTO ARTICLE (title,views,likes,date_posted,date_updated,content) VALUES 
-                ('%s','%s','%s','%s','%s','%s');
-        """%("How to install Flask",0,0,today,today,"article.html"))
+    # with open(os.path.join(HTML_DIR,"article.html"),encoding="UTF-8") as f:
+    #     content = "".join(f.readlines())
+    #     print(type(content))
+    #     today   = dt.date.today().strftime("%B %d, %Y")
+    #     con.cur.execute("""
+    #         INSERT INTO ARTICLE (title,views,likes,date_posted,date_updated,content) VALUES 
+    #             ('%s','%s','%s','%s','%s','%s');
+    #     """%("How to install Flask",0,0,today,today,"article.html"))
 
-        con.con.commit()
+    #     con.con.commit()
         
     con.close()

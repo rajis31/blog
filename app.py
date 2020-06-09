@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect,request, json
+from flask_paginate import Pagination, get_page_parameter
 import pymysql as sql
 import os
 import json
@@ -29,7 +30,12 @@ def article(id):
     db.cur.execute("USE articles;")
     db.cur.execute("SELECT likes FROM ARTICLE WHERE id = {0};".format(id))
     likes = [i[0] for i in db.cur.fetchall()][0]
-    return render_template("article{0}.html".format(id), id=id, likes=likes)
+
+    db.cur.execute("SELECT * FROM COMMENTS WHERE article_id = {0} ORDER BY comment_id desc".format(id))
+    comments = [comment for comment in db.cur.fetchall()]
+    print(comments)
+    db.close()
+    return render_template("article{0}.html".format(id), id=id, likes=likes, comments=comments)
 
 
 
@@ -105,6 +111,29 @@ def updateLikes():
     db.close()
     return ""
 
+@app.route("/comment",methods=["POST"])
+def addComment():
+    """ Updates db with new comment """
+
+    data = request.get_json()
+    print(data)
+    db = load_db()
+    db.connect()
+    db.cur.execute("USE articles;")
+    db.cur.execute("SELECT IFNULL(max(comment_id),0) FROM comments where article_id=%s;",data["article_id"])
+    comment_id = [i[0] for i in db.cur.fetchall()][0]+1
+    today   =  dt.datetime.now().strftime("%B %d, %Y %H:%M")
+
+    db.cur.execute("INSERT INTO comments (article_id,comment_id,name, \
+                    date_posted,content) VALUES (%s,%s,%s,%s,%s);", \
+                    (data["article_id"], comment_id, data["name"], today, data["comment"]))
+    db.con.commit()
+    db.close()
+
+    
+
+    return json.dumps({"article_id":data["article_id"], "name": data["name"],  "comment_id":comment_id, \
+                       "date_posted":today, "comment": data["comment"]   })
 
 
 if __name__=="__main__":

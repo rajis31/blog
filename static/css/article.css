@@ -116,26 +116,7 @@ header {
   color: #edf0f1;
 }
 
-@media screen and (max-height: 450px) {
-  .overlay a {
-    font-size: 20px;
-  }
-  .overlay .close {
-    font-size: 40px;
-    top: 15px;
-    right: 35px;
-  }
-}
 
-@media only screen and (max-width: 800px) {
-  .nav__links,
-  .cta {
-    display: none;
-  }
-  .menu {
-    display: initial;
-  }
-}
 
 /*** Article Content ***/
 .article-content {
@@ -232,45 +213,6 @@ code {
   margin-left: 10px;
 }
 
-.page-scroll {
-  width: 100%;
-}
-
-.page-scroll {
-  margin-left: 1em;
-  margin-right: 1em;
-  margin-bottom: 2em;
-  display: flex;
-  justify-content: space-around;
-  margin-top: 2em;
-
-}
-
-.page-scroll ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  font-size: 1em;
-  width: 100%;
-  justify-content: center;
-  padding: 0;
- 
-}
-
-
-.page-scroll a {
-  padding: 1em 2em;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  line-height: 1.5;
-  font-family: "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial,
-    sans-serif;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid #b6b6b6;
-}
-
 
 /**  Comment Section **/
 .comments{
@@ -280,11 +222,9 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #f2f3f3;
   margin-left: 1em;
   margin-right: 1em;
 }
-
 
 
 .comments button{
@@ -292,6 +232,7 @@ code {
   font-size: 24px;
   text-align: left;
   transition: 0.4s;
+  background: #eceff1;  
 }
 .comments button span{
   margin-right: 30px;
@@ -361,11 +302,53 @@ code {
 
 
 /*** Article thru scroll ***/
-
 .page-scroll a:hover {
   background-color: #898c8f;
   color: #fff !important;
 }
+
+
+.page-scroll {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2em;
+  border-top: 1px solid #f2f3f3;
+  width: 100%;
+  padding-top: 1em;
+  width: 100%;
+}
+
+.page-scroll ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 1em;
+  width: 100%;
+  justify-content: center;
+  padding: 0;
+ 
+}
+
+.page-scroll a {
+  padding: 1em 2em;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  line-height: 1.5;
+  font-family: "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial,
+    sans-serif;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #b6b6b6;
+}
+
+
+/*** Footer ***/
+
+
 
 .footer {
   width: 100vw;
@@ -396,3 +379,62 @@ code {
   font-size: 0.8em;
 }
 
+/*** Resposivenes ****/
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .close {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+
+  .comments{
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .comment-form{
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .comment-list{
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+
+/**** Pagination for Comments ****/
+
+.pagination-page-info {
+  padding: .6em;
+  padding-left: 0;
+  width: 40em;
+  margin: .5em;
+  margin-left: 0;
+  font-size: 12px;
+}
+.pagination-page-info b {
+  color: black;
+  background: #6aa6ed;
+  padding-left: 2px;
+  padding: .1em .25em;
+  font-size: 150%;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .nav__links,
+  .cta {
+    display: none;
+  }
+  .menu {
+    display: initial;
+  }
+}
