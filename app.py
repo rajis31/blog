@@ -35,7 +35,7 @@ def article(id):
     db.cur.execute("SELECT likes FROM article WHERE id = {0};".format(id))
     likes = [i[0] for i in db.cur.fetchall()][0]
 
-    db.cur.execute("SELECT * FROM COMMENTS WHERE article_id = {0} ORDER BY comment_id desc".format(id))
+    db.cur.execute("SELECT * FROM comments WHERE article_id = {0} ORDER BY comment_id desc".format(id))
     comments = [comment for comment in db.cur.fetchall()]
 
     db.cur.execute("SELECT max(id) FROM article;")
