@@ -15,26 +15,33 @@ app.config.from_json("config.json")
 
 @app.route("/")
 def homepage():
+    """ Load blog homepage blog listing """
+
     db = load_db()
     db.connect()
     db.cur.execute("USE articles;")
-    db.cur.execute("SELECT * FROM ARTICLE;")
+    db.cur.execute("SELECT * FROM article;")
     articles = [row for row in db.cur.fetchall()]
     return render_template("index.html", articles=articles)
 
 
 @app.route("/article<int:id>")
 def article(id):
+    """ Load individual article"""
+
     db = load_db()
     db.connect()
     db.cur.execute("USE articles;")
-    db.cur.execute("SELECT likes FROM ARTICLE WHERE id = {0};".format(id))
+    db.cur.execute("SELECT likes FROM article WHERE id = {0};".format(id))
     likes = [i[0] for i in db.cur.fetchall()][0]
 
     db.cur.execute("SELECT * FROM COMMENTS WHERE article_id = {0} ORDER BY comment_id desc".format(id))
     comments = [comment for comment in db.cur.fetchall()]
+
+    db.cur.execute("SELECT max(id) FROM article;")
+    max_id = [i for i in db.cur.fetchall()][0][0]
     db.close()
-    return render_template("article{0}.html".format(id), id=id, likes=likes, comments=comments)
+    return render_template("article{0}.html".format(id), id=id, max_id=max_id, likes=likes, comments=comments)
 
 
 
@@ -42,6 +49,7 @@ def article(id):
 @app.route("/write",methods=["POST"])
 def write():
     """ API endpoint to allow updating and writing of new articles"""
+
     data    = request.data
     headers = request.headers
     
@@ -74,7 +82,8 @@ def write():
                 db = load_db()
                 db.connect()
                 db.cur.execute("USE articles;")
-                db.cur.execute("INSERT INTO article(title,views,likes,date_posted,date_updated,content) VALUES \
+                db.cur.execute("INSERT INTO article(title,views,likes,date_posted, \
+                                date_updated,content) VALUES \
                                 (%s,%s,%s,%s,%s,%s);",(title,0,0,today,today,article_name))
                 db.con.commit()
                 db.close()
@@ -88,6 +97,7 @@ def write():
 @app.route("/views",methods=["POST"])
 def updateViews():
     """ Updates number of Views on a article"""
+
     data = request.get_json()
     db = load_db()
     db.connect()
@@ -100,8 +110,8 @@ def updateViews():
 @app.route("/likes",methods=["POST"])
 def updateLikes():
     """ Updates number of Likes on a article"""
+
     data = request.get_json()
-    print(data);
     db = load_db()
     db.connect()
     db.cur.execute("USE articles;")
@@ -115,7 +125,6 @@ def addComment():
     """ Updates db with new comment """
 
     data = request.get_json()
-    print(data)
     db = load_db()
     db.connect()
     db.cur.execute("USE articles;")
@@ -129,11 +138,15 @@ def addComment():
     db.con.commit()
     db.close()
 
-    
-
     return json.dumps({"article_id":data["article_id"], "name": data["name"],  "comment_id":comment_id, \
                        "date_posted":today, "comment": data["comment"]   })
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """ Handle routes not defined here """
+    
+    return render_template('404.html'), 404
 
 if __name__=="__main__":
     app.run(debug=True)

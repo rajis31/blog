@@ -15,10 +15,10 @@
         <ul class="nav__links">
             <li><a href="#">Login</a></li>
             <li><a href="#">Search</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{{url_for('homepage')}}">About</a></li>
         </ul>
         </nav>
-        <a class="cta" href="#">Contact</a>
+        <a class="cta" href="https://www.raj302.com">Contact</a>
         <p class="menu cta">Menu</p>
     </header>
     <div class="overlay">
@@ -26,7 +26,7 @@
         <div class="overlay__content">
             <a href="#">Login</a>
             <a href="#">Search</a>
-            <a href="#">About</a>
+            <a href="{{url_for('homepage')}}">About</a>
         </div>
     </div>
     <div class="article-content">
@@ -105,7 +105,6 @@
             </p>
         </div>
         <div class="image">
-            <img src="images/article1.png">
             <img src="{{ url_for('static', filename='images/article1.png') }}"> 
         </div>
         <div class="paragraph">
@@ -196,16 +195,41 @@
         </div>
 
     </div>
+    {% set lower_id = id-1 %}
+    {% set upper_id = id+1 %}
+
+
+    {% if lower_id >1 %}
     <div class="page-scroll">
         <ul>
-            <li> <a href="" style="color: #32859e;">Previous Article</a></i>
+            <li> <a href="{{ url_for('article',id=lower_id) }}" style="color: #32859e;">Previous Article</a></i>
+            <li><a href="{{ url_for('article',id=upper_id) }}" style="color: #898c8f;">Next Article</a> </li>
+        </ul>
+    </div>
+
+    {% elif lower_id>1 and upper_id>=max_id %}
+    <div class="page-scroll">
+        <ul>
+            <li> <a href="{{ url_for('article',id=lower_id) }}" style="color: #32859e;">Previous Article</a></i>
             <li><a href="#" style="color: #898c8f;">Next Article</a> </li>
         </ul>
     </div>
+
+    {% else %}
+    <div class="page-scroll">
+        <ul>
+            <li> <a href="{{ url_for('article',id=id) }}" style="color: #32859e;">Previous Article</a></i>
+            <li><a href="{{ url_for('article',id=id) }}" style="color: #898c8f;">Next Article</a> </li>
+        </ul>
+    </div>
+
+    {% endif %}
+
+
     <div class="footer">
         <p class="copyright">©2020 Copyright RAJ302.COM</p>
         <p><button onclick="updateLikes()">Like Me</button></p>
-        <p class="home"><a href="#">Go Back</a></p>
+        <p class="home"><a href="{{ url_for('homepage') }}">Go Back</a></p>
     </div>
     <script src="{{ url_for('static', filename='js/index.js') }}"> </script>
     <script src="{{ url_for('static', filename='js/article.js') }}"> </script>

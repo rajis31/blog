@@ -63,20 +63,4 @@ function copyLink(idx){
 }
 
 
-/*** Add in eventlistener to toggle comments ***/
-
-let toggleBTN = document.querySelector(".toggle");
-toggleBTN.addEventListener("click", function(){
-        let commentForm = document.querySelector(".comment-form");
-        let commentList = document.querySelector(".comment-list");
-
-        if (commentForm.style.display==="none" && commentList.style.display==="none" ){
-          commentForm.style.display = "flex";
-          commentList.style.display = "flex";
-        } else {
-          commentForm.style.display = "none";
-          commentList.style.display = "none";
-        }
-
-});
 
