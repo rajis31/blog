@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <title>Article</title>
 </head>
+
 <body>
     <header article_id={{id}} likes={{likes}}>
         <p style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 1.5rem;">Data Enthusiast</p>
@@ -31,134 +33,121 @@
     </div>
     <div class="article-content">
         <div class="title">
-            <p>Aggressively Estimating Pick Values</p>
+            <p>How to install Flask on a Ubuntu Server</p>
         </div>
         <div class="paragraph">
             <p>
-                <b> Quick Links ></b> Market Values, Trade Calculator <br><br>
-                It’s been 49 (!) days since I last updated the <a href="#">Market Values</a> Google Sheet, and a lot has
-                happened in those
-                48 days: personal and otherwise. (I got approached by DynastyLeagueFootball and FFStatistics for writing
-                positions!
-                I’m making it sound like there are (good?) excuses as to why I haven’t updated the market values since
-                the
-                end of December last year - but none of them are quite accurate. The real reason for the delay was that
-                I
-                was struggling to figure out how to incorporate the 2019 picks into the values table. This class has a
-                rather unprecedentedly bad reputation, especially for this time of year, which really throws a wrench
-                into
-                my usual draft-pick-value methodology. Let’s take a deeper dive into this.
+                Installing Flask on a Ubuntu server can be quite a daunting task especially if its your first time
+                doing this. I'm going to be using Python 3.6, MySQL V 8.0, uWSGI, nginx, and Ubuntu 18.04 LTS. Typically
+                the LTS versions of Ubuntu are much more stable then the regular versions. Just recently Ubuntu 20.04
+                came out which has a whole host of some pretty cool features such as faster installation times and
+                offering better performance overall. Flask is a popular micro web-framework that allows users to
+                quickly build prototypes and run them live on a server. There are other popular frameworks such as
+                Django that offers a more of a battery style approach which enables the users to have a more structured
+                approach to their projects.
             </p>
         </div>
         <div class="subtitle">
-            <p>Usual Methodology </p>
+            <p>Getting Started </p>
         </div>
         <div class="paragraph">
             <p>
-                Dynasty owners are notorious for valuing picks extremely high, despite their typically low
-                conversion/hit-rate (I did a hit-rate study a while back, Jacob Rickrode’s was far more popular, both
-                amounted to the same thing: drafting your actual picks is typically lower EV than you might think).
-                Despite
-                the analytics, we still trade picks at their topline premium. We have supreme confidence in our ability
-                to
-                evaluate and beat the odds. We’re in love with the allure of youth, unknown, and upside.
-            </p>
-        </div>
-        <div class="paragraph">
-            <p>
-                We have a tendency to look at picks through rose-colored glasses: when you look at the 1.02 draft pick
-                you
-                mentally frame it as “the second best player in the class”, anchoring that bias into your mind. You see
-                and
-                weigh fewer flaws into the valuation. This heightens over the course of the draft cycle up until the
-                league’s rookie draft - where the moment a pick is converted to a player all of that specific player’s
-                flaws
-                finally weigh back into the mental value calculation.
-            </p>
-        </div>
-        <div class="paragraph">
-            <p>
-                My usual methodology tries to approximate this “top-line” view by aggregating what the CURRENT best in
-                the
-                past few draft classes are ranked in terms of value. For example, the 1.10 pick by my methodology is
-                equal
-                to the average of the value of the current tenth best players in the 2015, 2016, 2017, and 2018 draft
-                classes as ranked right now. The goal of the method is (and has always been) to determine the absolute
-                maximum a pick should be worth. I’m always surprised by the number of people who tell me that even this
-                price can be too low - Saquon and 1.01 went for far more than the expectation last year!
-            </p>
-        </div>
-        <div class="paragraph">
-            <p>
-                2019 presented an interesting challenge to my usual process because of how much negative sentiment there
-                is
-                at the top-end of the prospect list. It was instantly clear to me that in no way would 1.01 be valued in
-                the
-                top 5 overall dynasty picks (thank you, Saquon! :smirk:) as originally planned. Was there any validity
-                for
-                these pick values? Only one way to find out: testing! 🤓
-                Despite being a data nerd, I didn’t take a very scientifically rigorous approach to this. I picked
-                several
-                pairings from the generated pick values and put them up on Reddit, Twitter, and a few league chats,
-                asking
-                for people to describe how close the comparisons were.
+                Before we go about setting your awesome Flask application, just make sure that you have access to a
+                webserver. Digitial Ocean and Linode are great cloud providers and you can spin up your own server
+                instance for as low as $5 where I'll be using Linode. Down below is a one of the plans from Linode that
+                could get you up and running quickly.
             </p>
         </div>
         <div class="image">
-            <img src="{{ url_for('static', filename='images/article1.png') }}"> 
-        </div>
-        <div class="paragraph">
-            <p>I got a sample of responses back - but here were two overriding results:</p>
-            <div class="list">
-                <ul>
-                    <li class="item">
-                        <p>1. 1.04 was worth far less than the guys valued around the pick (Thielen and Michel) - most
-                            people said that they’d slot the 1.01 right around that spot at this time.</p>
-                    </li>
-                    <li class="item">
-                        <p> 2. It quickly returns back to being about equal at 1.07 - and from that point on there was
-                            the
-                            usual
-                            wide disparity of dynasty owner opinions</p>
-                    </li>
-                </ul>
-            </div>
+            <img src="{{ url_for('static', filename='images/linode.JPG') }}">
         </div>
         <div class="paragraph">
             <p>
-                What to do? In theory, I could manually adjust the ranks so that 1.01-1.05 are slotted in at a certain
-                position…but I’ve never meant for these values to be a display of personal rankings and that would
-                definitely compromise that goal.
-                I continued tweaking and testing the algorithm, trying to weight the different classes and factors to
-                see if
-                the picks would better fit - but the answer never materialized.
+                To begin, <b>SSH</b> into your server instance and you will need to te ip address of your server.
+                We'll first login into your root account and then create a separate account that we'll use to put
+                to put your Flask application into production. It is not <b>recommended</b> to use your root account
+                for this as it poses a security risk if someone gets a hold of your credentials.
             </p>
-        </div>
-        <div class="subtitle">
-            <p>Ending decision: just publish it anyway!</p>
-        </div>
-        <div class="paragraph">
-            <p>So now that I’m nearing fifty days without an update, I’ve decided on my final algorithm - straight-line
-                averaging across the 2015-16-17-18 classes. Once actual 2019 rankings come out, I’ll weight them into
-                the
-                value of the picks (and by more than the usual gradual easing-in).</p>
             <div class="code">
-                <code>What about the pesky early firsts that everyone agrees is misplaced?</code>
+                <code>ssh root@server_ip</code>
             </div>
         </div>
         <div class="paragraph">
             <p>
-                I’ve defended trade calculators in many an argument, and at the end of the day my answer has always been
-                the
-                same - it’s an approximation of what is considered fair value, but shouldn’t be used as the be-all
-                end-all
-                for trade decisions. I also post things openly so that you can tweak them to your liking - if you think
-                1.01
-                is worth where 1.05 is worth, feel free to reference 1.05 wherever you would normally have referenced
-                1.01.
-                It’s a tool that you can adjust however you see fit!
+                Once your logged into your server instance, updates and other upgrades maybe needed to be installed on 
+                your server instance. This can be done using a single command coupled with the <b>&&</b> operator which 
+                means and. 
+            </p>
+            <div class="code">
+                <code>sudo apt update && apt upgrade</code>
+            </div>
+        </div>
+        <div class="paragraph">
+            <p>
+                After the updates have been installed, its time to install the various pre-reqiuisties to setup this project. 
+                Python 3 should already be installed as it comes with the os bundle. First go ahead and install a basic firewall. 
+                There are various firewall packages out and the one I'm going to be using is <b>ufw.</b> The steps below will 
+                setup ufw along with the exceptions to allow you to ssh and run your flask application on port 5000 (default port). 
+                If ssh isn't allowed, this can prevent you from opening a remote session with your server.
+
+                <div class="code" style="background-color;">
+                    <code>1. sudo apt install ufw</code> <br>
+                    <code>2. sudo ufw default allow outgoing</code><br>
+                    <code>3. sudo ufw default deny incoming</code><br>
+                    <code>4. sudo ufw allow ssh</code><br>
+                    <code>5. sudo ufw allow 5000 # Allow flask to run on port 5000</code><br>
+                    <code>6. sudo ufw enable</code><br>
+                    <code>7. sudo ufw status # Check the allowances</code><br>
+                </div>
             </p>
         </div>
+       
+
+        <div class="paragraph">
+            <p>
+                Next up since we don't want to use the root account, we'll go ahead and create a separate user profile. This user 
+                will also have <b>sudo</b> privileges so that way you don't need to keep logging into your root account. Once the 
+                user account has been setup log out of the root account and into this account.                   
+                <div class="code">
+                    <code>1. adduser production # Use whatever name you want here </code> <br>
+                    <code>2. adduser production sudo </code><br>
+                </div>
+            </p>
+          
+        </div>
+        <div class="paragraph">
+            <p>
+               Transfer over your flask project by running the <b>git clone</b> command and the url is to your git repository.
+               <div class="code">
+                    <code>git clone <i>url</i></code>
+               </div>
+            </p>
+        </div>
+
+        
+        <div class="subtitle">
+            <p>Setting up Python Virtual Environment</p>
+        </div>
+
+        <div class="paragraph">
+            <p>Next we're going to be setting up our running pyton virtual environment. Virtual enviroments are a great way 
+                to keep dependencies separate from other projects as other projects might run on a different set of requirements. 
+                It also makes it easier to run projects on various systems as you can use <b>pip</b> to create a <b>requirements.txt</b>
+                file that contains all your python dependencies for your project. The steps below will get your python virtual environment
+                all setup. In this setup I'll be calling my virtual environment <b>venv</b>, but your free to call it whatever you like.
+                I have a requirements.txt file already but if you don't have one, go ahead 
+            </p>
+
+            <div class="code">
+                <code>1. sudo apt install python3-pip</code> <br>
+                <code>2. sudo apt install python3-venv  </code> <br>
+                <code>3. cd /path/to/project</code><br>
+                <code>4. python3 -m venv <i>venv</i> # Provide a name for your VE  </code> <br>
+                <code>5. source venv/bin/activate </code>
+                <code>6. pip install -r requirements.txt to</code>
+            </div>
+        </div>
+     
         <div class="article-info">
             <ul>
                 <li><b>Categories:</b> Values </li>
@@ -178,20 +167,20 @@
                 <input type="submit" onclick="updateComment()" value="Post">
             </form>
         </div>
-      
+
         <div class="comment-list">
 
             {% for comment in comments %}
-                <div class="comment" comment-id={{ comment[1] }}>
-                    <div class="comment-upper">
-                        <p class="comment-name">{{ comment[2] }}</p>
-                        <p class="comment-date">{{ comment[3] }}</p>
-                    </div>
-                    <div class="comment-lower">
-                        <p class="comment-text">{{ comment[4] }}</p>
-                    </div>
+            <div class="comment" comment-id={{ comment[1] }}>
+                <div class="comment-upper">
+                    <p class="comment-name">{{ comment[2] }}</p>
+                    <p class="comment-date">{{ comment[3] }}</p>
                 </div>
-          {% endfor %}
+                <div class="comment-lower">
+                    <p class="comment-text">{{ comment[4] }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
     </div>
@@ -236,4 +225,5 @@
 
 
 </body>
+
 </html>
