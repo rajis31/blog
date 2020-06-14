@@ -90,14 +90,16 @@
                 setup ufw along with the exceptions to allow you to ssh and run your flask application on port 5000 (default port). 
                 If ssh isn't allowed, this can prevent you from opening a remote session with your server.
 
-                <div class="code" style="background-color;">
-                    <code>1. sudo apt install ufw</code> <br>
-                    <code>2. sudo ufw default allow outgoing</code><br>
-                    <code>3. sudo ufw default deny incoming</code><br>
-                    <code>4. sudo ufw allow ssh</code><br>
-                    <code>5. sudo ufw allow 5000 # Allow flask to run on port 5000</code><br>
-                    <code>6. sudo ufw enable</code><br>
-                    <code>7. sudo ufw status # Check the allowances</code><br>
+                <div class="code">
+                    <div class="multiline">
+                        <code>1. sudo apt install ufw</code> <br>
+                        <code>2. sudo ufw default allow outgoing</code><br>
+                        <code>3. sudo ufw default deny incoming</code><br>
+                        <code>4. sudo ufw allow ssh</code><br>
+                        <code>5. sudo ufw allow 5000 # Allow flask to run on port 5000</code><br>
+                        <code>6. sudo ufw enable</code><br>
+                        <code>7. sudo ufw status # Check the allowances</code><br>
+                    </div>
                 </div>
             </p>
         </div>
@@ -139,12 +141,14 @@
             </p>
 
             <div class="code">
-                <code>1. sudo apt install python3-pip</code> <br>
-                <code>2. sudo apt install python3-venv  </code> <br>
-                <code>3. cd /path/to/project</code><br>
-                <code>4. python3 -m venv <i>venv</i> # Provide a name for your VE  </code> <br>
-                <code>5. source venv/bin/activate </code>
-                <code>6. pip install -r requirements.txt to</code>
+                <div class="multiline">
+                    <code>1. sudo apt install python3-pip</code> <br>
+                    <code>2. sudo apt install python3-venv  </code> <br>
+                    <code>3. cd /path/to/project</code><br>
+                    <code>4. python3 -m venv <i>venv</i> # Provide a name for your VE  </code> <br>
+                    <code>5. source venv/bin/activate </code> <br>
+                    <code>6. pip install -r requirements.txt</code>
+                </div>
             </div>
         </div>
      
@@ -220,10 +224,7 @@
         <p><button onclick="updateLikes()">Like Me</button></p>
         <p class="home"><a href="{{ url_for('homepage') }}">Go Back</a></p>
     </div>
-    <script src="{{ url_for('static', filename='js/index.js') }}"> </script>
     <script src="{{ url_for('static', filename='js/article.js') }}"> </script>
-
-
 </body>
 
 </html>

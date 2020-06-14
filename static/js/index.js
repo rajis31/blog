@@ -63,4 +63,21 @@ function copyLink(idx){
 }
 
 
+// go to various links 
+let icons = document.querySelector(".footer-links").querySelectorAll("li");
 
+for(let i=0; i<icons.length;i++){
+  icons[i].addEventListener("click",function(){
+    if(i===0){
+      document.location.href="https://bitbucket.org/raji31/";
+    } else if(i===1){
+      document.location.href="https://github.com/rajis31";
+    } else if (i===2){
+      document.location.href="https://www.linkedin.com/in/rajsol/";
+    } else if (i===3){
+      document.location.href="https://www.raj302.com";
+    } else if (i===4){
+      document.location.href="https://twitter.com/RajSola48138209"
+    }
+  });
+}

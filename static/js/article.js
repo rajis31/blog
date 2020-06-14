@@ -1,3 +1,19 @@
+const doc = document;
+const menuOpen = doc.querySelector(".menu");
+const menuClose = doc.querySelector(".close");
+const overlay = doc.querySelector(".overlay");
+
+// Top menu overlay
+
+menuOpen.addEventListener("click", () => {
+  overlay.classList.add("overlay--active");
+});
+
+menuClose.addEventListener("click", () => {
+  overlay.classList.remove("overlay--active");
+});
+
+
 // Links Update
 let article_id = document.querySelector("header").getAttribute("article_id");
 let likes      = document.querySelector("header").getAttribute("likes");
