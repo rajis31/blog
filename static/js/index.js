@@ -24,6 +24,8 @@ for (let idx = 0; idx < linkBtns.length; idx++) {
 }
 
 function updateViews(idx) {
+  // update view count on backend
+
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -44,59 +46,64 @@ function updateViews(idx) {
   xmlhttp.send(JSON.stringify(sendData));
 }
 
-// Copy article link to clipboard 
+// Copy article link to clipboard
 let linkBTNS = document.querySelectorAll(".card-links");
 
-for(let idx =0; idx<linkBTNS.length;idx++){
-   linkBTNS[idx].querySelectorAll("button")[1].addEventListener("click",function(){ copyLink(idx+1) });
+for (let idx = 0; idx < linkBTNS.length; idx++) {
+  linkBTNS[idx]
+    .querySelectorAll("button")[1]
+    .addEventListener("click", function () {
+      copyLink(idx + 1);
+    });
 }
 
-function copyLink(idx){
-    let articleURL = location.href+"article"+idx;
-    let copyhelper = document.createElement("input");
-    copyhelper.className = 'copyhelper'
-    document.body.appendChild(copyhelper);
-    copyhelper.value = articleURL;
-    copyhelper.select();
-    document.execCommand("copy");
-    document.body.removeChild(copyhelper);
+function copyLink(idx) {
+  let articleURL = location.href + "article" + idx;
+  let copyhelper = document.createElement("input");
+  copyhelper.className = "copyhelper";
+  document.body.appendChild(copyhelper);
+  copyhelper.value = articleURL;
+  copyhelper.select();
+  document.execCommand("copy");
+  document.body.removeChild(copyhelper);
 }
 
-
-// go to various links 
+// go to various links
 let icons = document.querySelector(".footer-links").querySelectorAll("li");
 
-for(let i=0; i<icons.length;i++){
-  icons[i].addEventListener("click",function(){
-    if(i===0){
-      document.location.href="https://bitbucket.org/raji31/";
-    } else if(i===1){
-      document.location.href="https://github.com/rajis31";
-    } else if (i===2){
-      document.location.href="https://www.linkedin.com/in/rajsol/";
-    } else if (i===3){
-      document.location.href="https://www.raj302.com";
-    } else if (i===4){
-      document.location.href="https://twitter.com/RajSola48138209"
+for (let i = 0; i < icons.length; i++) {
+  icons[i].addEventListener("click", function () {
+    if (i === 0) {
+      document.location.href = "https://bitbucket.org/raji31/";
+    } else if (i === 1) {
+      document.location.href = "https://github.com/rajis31";
+    } else if (i === 2) {
+      document.location.href = "https://www.linkedin.com/in/rajsol/";
+    } else if (i === 3) {
+      document.location.href = "https://www.raj302.com";
+    } else if (i === 4) {
+      document.location.href = "https://twitter.com/RajSola48138209";
     }
   });
 }
 
+// article overlay
 
-// article overlay 
+function about_on() {
+  // Turn on about overlay
 
-function on() {
   document.getElementsByClassName("about-overlay")[0].style.display = "block";
 }
 
-function off() {
+function about_off() {
+  // Turn off about overlay
+
   document.getElementsByClassName("about-overlay")[0].style.display = "none";
 }
 
-// update alert 
-function update(){
+// update alert
+function update() {
+  // Instruct user if functionality is not implemented
+
   alert("This functionality has not been implemented yet.");
 }
-
-
-
