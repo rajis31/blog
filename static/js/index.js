@@ -81,3 +81,22 @@ for(let i=0; i<icons.length;i++){
     }
   });
 }
+
+
+// article overlay 
+
+function on() {
+  document.getElementsByClassName("about-overlay")[0].style.display = "block";
+}
+
+function off() {
+  document.getElementsByClassName("about-overlay")[0].style.display = "none";
+}
+
+// update alert 
+function update(){
+  alert("This functionality has not been implemented yet.");
+}
+
+
+

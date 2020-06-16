@@ -32,8 +32,11 @@ def article(id):
     db = load_db()
     db.connect()
     db.cur.execute("USE articles;")
-    db.cur.execute("SELECT likes FROM article WHERE id = {0};".format(id))
-    likes = [i[0] for i in db.cur.fetchall()][0]
+    db.cur.execute("SELECT likes, date_posted FROM article WHERE id = {0};".format(id))
+    res        = [i for i in db.cur.fetchall()]
+    print(res)
+    likes      = res[0][0]
+    date_posted = res[0][1]
 
     db.cur.execute("SELECT * FROM comments WHERE article_id = {0} ORDER BY comment_id desc".format(id))
     comments = [comment for comment in db.cur.fetchall()]
@@ -41,7 +44,7 @@ def article(id):
     db.cur.execute("SELECT max(id) FROM article;")
     max_id = [i for i in db.cur.fetchall()][0][0]
     db.close()
-    return render_template("article{0}.html".format(id), id=id, max_id=max_id, likes=likes, comments=comments)
+    return render_template("article{0}.html".format(id), id=id, max_id=max_id, likes=likes, comments=comments, date_posted = date_posted)
 
 
 

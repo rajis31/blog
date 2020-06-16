@@ -8,6 +8,8 @@
     <link rel='shortcut icon' type='image/x-icon' href='favicon.png' />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link rel='shortcut icon' type='image/x-icon' href="{{ url_for('static', filename='images/favicon.png') }}">
+
     <title>Article</title>
 </head>
 
@@ -153,11 +155,75 @@
                 </div>
             </div>
         </div>
+
+        <div class="paragraph">
+            <p>
+                Next setup your flask project and the first thing you will need is your environment variables. You will need 
+                variables such as <b>Secret Key</b>, <b>Db URL</b>, <b>Email_pass</b>, <b>etc.</b> Setup your variables in a 
+                <b>config.jsob</b> file which you will then place in the <b>/etc</b> folder or wherever suits your project needs. 
+                A typical config file will look like 
+
+                <div class="multiline">
+                        <code>1. { </code> <br>
+                        <code> 2. “SECRET_KEY”: < Secret Key >,</code> <br> 
+                        <code> 3. “SQLALCHEMY_DATABASE_URI”: < URI >,</code><br>     
+                        <code> 4. “SQLALCHEMY_TRACK_MODIFICATIONS”: “FALSE”,</code> <br>     
+                        <code> 5. “MAIL_SERVER”: “smtp.gmail.com”,</code> <br>    
+                        <code> 6. “MAIL_PORT”: 587,</code> <br>     
+                        <code> 7. “MAIL_USE_TLS”: 1,</code><br>     
+                        <code> 8. “MAIL_USERNAME”: < email >,</code> <br>     
+                        <code> 9. “MAIL_PASSWORD”: < pass ></pass></code>  <br>    
+                        <code> 10. }</code>     
+                </div>
+            </p>
+            <p>
+                Also ensure that your flask project is able to read in the json file. If not you can add the following 
+                lines to your code to your <b>app.py</b> file or wherever you are creating the flask app object. 
+
+                <div class="multiline">
+
+                    <code>1. with open(“/etc/config.json”) as config_file:</code> <br>
+                    <code>2.&emsp; config=json.load(config_file)</code>
+
+                </div>
+            </p>
+        </div>
+
+        <div class="paragraph">
+            <p>
+                Now that all the parameters are in place, you can test your flask application. We'll expose it to the public by 
+                adding <b>0.0.0.0</b> as one of the arguments below which will expose your flask application to the outside 
+                world. You'll run these commands in your terminal.  If for whatever reason your application fails to run, try 
+                it in debug mode to see what errors it shows.  After staring up your flask application, go ahead and open up 
+                your brower to <i>server_ip:5000</i>. You should be able to see your application.
+
+                <div class="multiline">
+                    <code>1. export FLASK_APP = app.py</code><br>
+                    <code>2. flask run -- host=0.0.0.0</code>
+
+                </div>
+            </p>
+
+        </div>
+
+         
+        <div class="subtitle">
+            <p>Conclusion</p>
+        </div>
+
+        <div class="paragraph">
+            <p>
+                Now that you are able to run your flask application on your server, you should be able to setup <b>Guinconr</b> or 
+                <b>uWSGI</b> with your <b>nginx</b> instance which should allow you to run your website indefintely. You will need to
+                configure nginx and one of the <b>wsgi</b> web servers above to get your flask application running. 
+            </p>
+        </div>
+
      
         <div class="article-info">
             <ul>
                 <li><b>Categories:</b> Values </li>
-                <li><b>Updated</b> May, 15 2020</li>
+                <li><b>Updated</b> {{ date_posted }}</li>
             </ul>
         </div>
     </div>

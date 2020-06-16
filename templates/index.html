@@ -8,30 +8,43 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel='shortcut icon' type='image/x-icon' href='favicon.png' />
-
+    <link rel='shortcut icon' type='image/x-icon' href="{{ url_for('static', filename='images/favicon.png') }}"
 </head>
 <body>
     <div class="content">
         <header>
             <p style="font-family: 'Orbitron', sans-serif; color: #fff; font-size: 1.5rem;">Data Enthusiast</p>
             <ul class="nav__links">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#" onclick="update()">Login</a></li>
+                <li><a href="#" onclick="update()">Search</a></li>
+                <li><a href="#about" onclick="on()">About</a></li>
             </ul>
             </nav>
             <a class="cta" href="https:///www.raj302.com">Contact</a>
             <p class="menu cta">Menu</p>
         </header>
+
         <div class="overlay">
             <a class="close">&times;</a>
             <div class="overlay__content">
-                <a href="#">Login</a>
-                <a href="#">Search</a>
-                <a href="#">About</a>
+                <a href="https://www.raj302.com">Portfolio</a>
+                <a href="#" onclick="on()">About</a>
             </div>
         </div>
+
+        <div class="about-overlay" onclick="off()">
+            <div class="about-text">
+                <p>
+                    Welcome to my blog. Here I will post various articles on topics centered around 
+                    python, MySQL, and various other technologies. Don't forget to press the like 
+                    button. Thanks for stopping by. :) <br><br>
+                    
+                    <span style="font-size: 12px;">(Click anywhere to close this)</span>
+                </p>
+            </div>
+        </div>
+
+
 
 
         {% for article_row in articles | batch(3, None) %}
