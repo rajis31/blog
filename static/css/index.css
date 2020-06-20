@@ -382,6 +382,7 @@ header {
 }
 
 
+
 /*** Responsiveness ***/
 
 @media only screen and (max-width: 600px) {
@@ -407,8 +408,19 @@ header {
 
 
   .right-footer ul {
-    justify-content: space-evenly: 
+    justify-content: space-evenly;
   }
   
 }
 
+/**** Additional css defitions for edge ***/
+
+@supports (-ms-ime-align:auto) {
+  .footer-links {
+      justify-content: space-around !important;
+  }
+
+  .card-links {
+    justify-content: space-around !important;
+}
+}

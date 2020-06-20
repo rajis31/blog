@@ -107,3 +107,16 @@ function update() {
 
   alert("This functionality has not been implemented yet.");
 }
+
+// Copy Link to indicate link copied 
+let copyBtns = document.querySelectorAll(".copy-link");
+
+for(let i=0; i<copyBtns.length;i++){
+  copyBtns[i].addEventListener("mousedown", function(e){
+      e.target.textContent="Copied"
+  });
+
+  copyBtns[i].addEventListener("mouseup", function(e){
+    e.target.textContent="Copy Link"
+});
+}

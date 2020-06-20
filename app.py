@@ -34,7 +34,6 @@ def article(id):
     db.cur.execute("USE articles;")
     db.cur.execute("SELECT likes, date_posted FROM article WHERE id = {0};".format(id))
     res        = [i for i in db.cur.fetchall()]
-    print(res)
     likes      = res[0][0]
     date_posted = res[0][1]
 

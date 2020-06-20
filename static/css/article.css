@@ -195,6 +195,7 @@ code {
 
 .multiline{
   width: fit-content;
+  width: -moz-fit-content;
   background: #000;
   padding-left: 0.4em;
   padding-right: 0.4em;
@@ -437,4 +438,17 @@ code {
   .menu {
     display: initial;
   }
+}
+
+
+/**** Additional css defitions for edge ***/
+@supports (-ms-ime-align:auto) {
+  .footer{
+      justify-content: space-around !important;
+  }
+
+  .multiline{
+    display: table !important;
+  }
+
 }
